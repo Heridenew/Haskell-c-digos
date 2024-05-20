@@ -2,20 +2,19 @@
 -- 08/05/2024
 -- Código em Haskell que faz uma soma dentro de uma lista
 
-flag :: Bool
-flag = False
+maquinaSomar :: [Int] -> [Int]
+maquinaSomar [] = []
+maquinaSomar xs = maquinaSomar' xs []
+  where
+    maquinaSomar' [] acc = acc
+    maquinaSomar' (0:0:_) acc = acc  -- sequência 0,0 encontrada, encerra a computação
+    maquinaSomar' (x:xs) acc
+      | x == 0 = maquinaSomar' xs acc
+      | otherwise =
+        let (soma, rest) = span (/= 0) xs
+        in maquinaSomar' rest (acc ++ [x + sum soma])
 
--- Função que verifica os valores da lista e soma os valores que estão entre dois "0"
-maquinaSomar :: [Int] -> Int
-maquinaSomar [] = 0
-maquinaSomar (0:0:_) = 0  
-maquinaSomar (x:xs)
-    | x == 0 && flag == True = x
-    | otherwise = x + maquinaSomar xs  
-    where
-        flag = True
-
-
+main :: IO ()
 main = do
-    lista <- getLine
-    print $ maquinaSomar (read lista :: [Int])
+  lista <- getLine
+  print $ maquinaSomar (read lista :: [Int])

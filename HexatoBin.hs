@@ -3,7 +3,7 @@
 -- Código em Haskell que recebe um hexadecimal e converte para binário
 
 
--- Biblioteca/Função de conversão de Hexadecimal para binário
+-- Biblioteca
 hexToBi :: Char -> String
 hexToBi '0' = "0000"
 hexToBi '1' = "0001"
@@ -22,11 +22,9 @@ hexToBi 'D' = "1101"
 hexToBi 'E' = "1110"
 hexToBi 'F' = "1111"
 
--- Função principal que recebe uma string e retorna uma string
 htob :: String -> String
 htob [] = ""
-htob (x:xs) = hexToBi x ++ htob xs -- Percorre a string recursivamente e vai convertendo em binário
-
+htob (x:xs) = hexToBi x ++ htob xs
 
 main :: IO ()
 main = do
